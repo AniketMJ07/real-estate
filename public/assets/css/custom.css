@@ -1,0 +1,61 @@
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+    content: "+"; /* Replace arrow with plus */
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--bs-primary); /* Optional: blue color */
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+table.dataTable.dtr-inline.collapsed
+    > tbody
+    > tr.parent
+    > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed
+    > tbody
+    > tr.dt-hasChild.dtr-expanded
+    > td.dtr-control:before {
+    content: "-"; /* Replace arrow with plus */
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--bs-danger); /* Optional: blue color */
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.form-check-input {
+    cursor: pointer !important;
+}
+
+.form-check-input.input-success:not(:checked) {
+    background-color: var(--bs-danger); /* Bootstrap red */
+    border-color: var(--bs-danger);
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
+}
+.custom-switch-v1.form-switch .form-check-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e") !important;
+}
+
+.form-check-input.input-success:focus {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
+}
+
+.hero-bg-gradient {
+    --bg-size: 400%;
+    --color-one: rgb(37, 161, 244);
+    --color-two: rgb(249, 31, 169);
+    background: linear-gradient(
+            90deg,
+            var(--color-one),
+            var(--color-two),
+            var(--color-one)
+        )
+        0 0 / var(--bg-size) 100%;
+    color: white;
+    /* -webkit-background-clip: text; */
+    /* background-clip: text; */
+    animation: move-bg 24s infinite linear;
+}
