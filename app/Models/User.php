@@ -4,13 +4,17 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Business;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use Impersonate;
+    use HasRoles;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, Impersonate;
 
@@ -47,11 +51,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'system_role',
-        'aadhaar',
-        'aadhaar_data',
-        'pan',
-        'pan_data',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'roles',
+        'system_reserve',
+        'media',
+        'register_ip',
+        'status',
+        'last_login',
+        'device_type',
+        'auth_token',
     ];
 
     /**
@@ -67,15 +77,15 @@ class User extends Authenticatable
         ];
     }
 
-    public function business()
+   
+    /**
+     * Get the user's all permissions.
+     */
+    public function getPermissionAttribute()
     {
-        return $this->businesses()->where('id', session('selected_business_id'))->first();
+        return $this->getAllPermissions();
     }
 
-    public function businesses()
-    {
-        return $this->belongsToMany(Business::class)
-            ->withPivot('role')
-            ->withTimestamps();
-    }
+
+   
 }

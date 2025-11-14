@@ -103,7 +103,7 @@
                                 </div>
                                 <hr class="border-secondary border-opacity-50" />
                                 <p class="text-span f-w-600">Manage</p>
-                                <a href="{{ route('profile') }}" class="dropdown-item">
+                                <a href="" class="dropdown-item">
                                     <span>
                                         <svg class="pc-icon text-muted me-2">
                                             <use xlink:href="#custom-setting-outline"></use>
@@ -114,41 +114,7 @@
                                 @if (auth()->user()->system_role != 'admin')
                                     <hr class="border-secondary border-opacity-50" />
                                     <p class="text-span f-w-600">Businesses</p>
-                                    @foreach (auth()->user()->businesses as $business)
-                                        @if ($business->id == session('selected_business_id'))
-                                            <a href="#" class="dropdown-item active" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Showing {{ $business->name }} currently">
-                                                <div class="d-flex align-items-center">
-                                                    <i data-feather="check-circle"
-                                                        class="pc-icon text-success me-3"></i>
-                                                    <span class="text-wrap">{{ $business->name }}</span>
-                                                </div>
-                                                <div class="user-group">
-                                                    <small
-                                                        class="text-muted">{{ ucfirst($business->pivot->role) }}</small>
-                                                </div>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('business.change.scope', $business->id) }}"
-                                                class="dropdown-item" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Open {{ $business->name }}">
-                                                <div class="d-flex align-items-center">
-                                                    @if ($business->logo != null)
-                                                        <img src="{{ asset($business->logo) }}" alt="business-logo"
-                                                            class="img-fluid user-avtar me-2"
-                                                            style="max-width: 25px" />
-                                                    @else
-                                                        <i class="ti ti-building-store me-3"></i>
-                                                    @endif
-                                                    <span class="text-wrap">{{ $business->name }}</span>
-                                                </div>
-                                                <div class="user-group ms-1">
-                                                    <small
-                                                        class="text-muted">{{ ucfirst($business->pivot->role) }}</small>
-                                                </div>
-                                            </a>
-                                        @endif
-                                    @endforeach
+                                   
                                     <div class="my-2 text-center">
                                         <a href="{{ route('business.create') }}"
                                             class="btn btn-sm btn-outline-secondary w-100">

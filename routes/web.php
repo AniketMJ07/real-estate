@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -37,5 +37,11 @@ Route::get('/verify-email', [RegisterController::class, 'verify_email'])->name('
 
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::middleware(['auth', 'user.roles'])->as('admin.')->prefix('admin')->group(function () {
+   
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});

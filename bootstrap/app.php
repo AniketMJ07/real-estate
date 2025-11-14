@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckIpAddress;
-use App\Http\Middleware\UserSystemRole;
+use App\Http\Middleware\UserRoles;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,10 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'system.role' => UserSystemRole::class,
+            'user.roles' => UserRoles::class,
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
             'check.ip' => CheckIpAddress::class,
-            'check.business.user.role' => \App\Http\Middleware\CheckBusinessUserRole::class,
+           
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

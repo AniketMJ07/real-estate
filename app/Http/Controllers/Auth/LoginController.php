@@ -23,22 +23,8 @@ class LoginController extends Controller
     public function authenticated($status = null, $message = null)
     {
         $user = auth()->user();
-        $system_role = $user->system_role;
-        if ($system_role == null) {
-            $system_role = User::find($user->id)->system_role;
-        }
-        if ($user && $system_role == "user") {
-            if ($user->businesses()->exists() && $user->businesses->count() > 0) {
-                if ($user->default_business_id != null) {
-                    Session::put('selected_business_id', $user->default_business_id);
-                } else {
-                    Session::put('selected_business_id', $user->businesses->first()->id);
-                }
-                return redirect()->intended(route('dashboard'))->with($status, $message);
-            } else {
-                return redirect()->to(route('business.create'));
-            }
-        } elseif ($user && $system_role == "admin") {
+
+        if ($user) {
             return redirect()->route('admin.dashboard');
         } else {
             Auth::logout();
@@ -77,7 +63,7 @@ class LoginController extends Controller
             return redirect()->back()->withInput(['email' => $request->email])->with('error', 'Please verify your email before logging in.');
         }
 
-        
+
         if (Hash::check($request->password, $user->password)) {
             auth()->login($user, $request->has('remember_token'));
         } else {

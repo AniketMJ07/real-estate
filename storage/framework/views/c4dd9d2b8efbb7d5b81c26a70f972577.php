@@ -21,7 +21,7 @@
     <?php endif; ?>
     <?php echo $__env->yieldContent('main_content'); ?>
 
-    <?php echo $__env->make('landing.layouts.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
     <?php echo $__env->make('layouts.js', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <?php echo $__env->make('widgets.toast', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <?php echo $__env->yieldPushContent('modals'); ?>

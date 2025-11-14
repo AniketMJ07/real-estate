@@ -20,7 +20,7 @@
     @endif
     @yield('main_content')
 
-    @include('landing.layouts.footer')
+
     @include('layouts.js')
     @include('widgets.toast')
     @stack('modals')
