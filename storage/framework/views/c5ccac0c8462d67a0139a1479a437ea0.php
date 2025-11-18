@@ -117,7 +117,7 @@
                                     <p class="text-span f-w-600">Businesses</p>
                                    
                                     <div class="my-2 text-center">
-                                        <a href="<?php echo e(route('business.create')); ?>"
+                                        <a href=""
                                             class="btn btn-sm btn-outline-secondary w-100">
                                             <i class="ti ti-plus me-2"></i> New Business
                                         </a>
