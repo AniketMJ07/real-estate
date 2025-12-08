@@ -3,6 +3,7 @@ Dashboard
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('main_content'); ?>
 <?php echo $__env->make('widgets.loader', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
 <div class="pc-container">
     <div class="pc-content"><!-- [ Main Content ] start -->
         <div class="row">
@@ -2246,6 +2247,7 @@ Dashboard
         </div><!-- [ Main Content ] end -->
     </div>
 </div>
+
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('scripts'); ?>
 <script src="<?php echo e(asset('assets/js/plugins/apexcharts.min.js')); ?>"></script>

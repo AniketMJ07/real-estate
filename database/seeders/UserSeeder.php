@@ -64,6 +64,7 @@ class UserSeeder extends Seeder
         $userRole = Role::updateOrCreate([
             'name' => RoleEnum::USER,
         ]);
+        
         $user = User::factory()->create([
             'name' => 'demo user',
             'email' => 'user@demo.com',

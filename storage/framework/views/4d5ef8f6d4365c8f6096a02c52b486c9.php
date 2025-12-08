@@ -1,12 +1,11 @@
-@extends('layouts.master')
-@section('title')
+<?php $__env->startSection('title'); ?>
 Users
-@endsection
-@push('head_css')
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap-switch-button.min.css') }}" />
-@endpush
-@section('main_content')
-@include('widgets.loader')
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('head_css'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/plugins/bootstrap-switch-button.min.css')); ?>" />
+<?php $__env->stopPush(); ?>
+<?php $__env->startSection('main_content'); ?>
+<?php echo $__env->make('widgets.loader', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <div class="pc-container">
     <div class="pc-content">
         <div class="page-header">
@@ -14,7 +13,7 @@ Users
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin Area</a>
+                            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.dashboard')); ?>">Admin Area</a>
                             <li class="breadcrumb-item active" aria-current="page">Users</li>
                             </li>
                         </ul>
@@ -61,8 +60,8 @@ Users
         </div>
     </div>
 </div>
-@endsection
-@push('modals')
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('modals'); ?>
 <div id="createUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createUserModalTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -71,24 +70,24 @@ Users
                 <h5 class="modal-title" id="createUserModalTitle">Create User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('admin.users.store') }}" method="POST">
+            <form action="<?php echo e(route('admin.users.store')); ?>" method="POST">
                 <div class="modal-body">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <input hidden name="id" value="" id="id">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">First Name<span class="text-danger">*</span></label>
                         <input type="text" name="first_name" class="form-control" id="first_name"
-                            value="{{ old('first_name') }}" required>
+                            value="<?php echo e(old('first_name')); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="last_name" class="form-label">Last Name</label>
                         <input type="text" name="last_name" class="form-control" id="last_name"
-                            value="{{ old('last_name') }}">
+                            value="<?php echo e(old('last_name')); ?>">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
                         <input type="tel" name="phone" class="form-control" id="phone"
-                            value="{{ old('phone') }}" required minlength="10" maxlength="10">
+                            value="<?php echo e(old('phone')); ?>" required minlength="10" maxlength="10">
                         <span class="text-muted">
                             Please enter a valid 10-digit mobile number.
                         </span>
@@ -96,7 +95,7 @@ Users
                     <div class="mb-3">
                         <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control" id="email"
-                            value="{{ old('email') }}" required>
+                            value="<?php echo e(old('email')); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
@@ -126,18 +125,18 @@ Users
         </div>
     </div>
 </div>
-@endpush
-@push('scripts')
-<script src="{{ asset('assets/js/plugins/dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/bootstrap-switch-button.min.js') }}"></script>
+<?php $__env->stopPush(); ?>
+<?php $__env->startPush('scripts'); ?>
+<script src="<?php echo e(asset('assets/js/plugins/dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/plugins/dataTables.bootstrap5.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/plugins/bootstrap-switch-button.min.js')); ?>"></script>
 
 <script>
     $(document).ready(function() {
         const table = $('#userTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('admin.datatable.users') }}",
+            ajax: "<?php echo e(route('admin.datatable.users')); ?>",
             columns: [{
                     data: 'id',
                     name: 'id'
@@ -219,7 +218,7 @@ Users
             const system_role = $(this).data('sysrole');
 
             $('#createUserModalTitle').text('Edit User');
-            var updateUrl = "{{ route('admin.users.update', ':id') }}".replace(':id', id);
+            var updateUrl = "<?php echo e(route('admin.users.update', ':id')); ?>".replace(':id', id);
             $('#createUserModal form').attr('action', updateUrl);
             // Remove any previous _method input
             $('#createUserModal form input[name="_method"]').remove();
@@ -241,7 +240,7 @@ Users
         // Reset modal to create mode when closed
         $('#createUserModal').on('hidden.bs.modal', function() {
             $('#createUserModalTitle').text('Create User');
-            $('#createUserModal form').attr('action', "{{ route('admin.users.store') }}");
+            $('#createUserModal form').attr('action', "<?php echo e(route('admin.users.store')); ?>");
             $('#createUserModal form input[name="_method"]').remove();
             $('#password').attr('required', true);
             $('#createUser_button').text('Create User');
@@ -254,10 +253,10 @@ Users
             const isActive = $(this).prop('checked') ? 1 : 0;
 
             $.ajax({
-                url: "{{ route('admin.users.ban.toggle', ':id') }}".replace(':id', userId),
+                url: "<?php echo e(route('admin.users.ban.toggle', ':id')); ?>".replace(':id', userId),
                 method: 'PUT',
                 data: {
-                    _token: '{{ csrf_token() }}',
+                    _token: '<?php echo e(csrf_token()); ?>',
                 },
                 success: function(response) {
                     if (response.success) {
@@ -276,4 +275,5 @@ Users
         });
     });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /Volumes/wd_work/github/ableprolaravel/resources/views/admin/users/index.blade.php ENDPATH**/ ?>

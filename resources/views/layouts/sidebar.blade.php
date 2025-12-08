@@ -54,6 +54,16 @@
                 <li class="pc-item pc-caption">
                     <label data-i18n="Navigation">Navigation</label>
                 </li>
+                 <li class="pc-item">
+                    <a href="{{ route('admin.users') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-story"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="users">users</span>
+                    </a>
+                </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link">
                         <span class="pc-micon">

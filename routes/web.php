@@ -1,6 +1,8 @@
 <?php
 
+use App\DataTables\Admin\UsersDataTable;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -37,11 +39,22 @@ Route::get('/verify-email', [RegisterController::class, 'verify_email'])->name('
 
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
 Route::middleware(['auth', 'user.roles'])->as('admin.')->prefix('admin')->group(function () {
-   
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/users/impersonate', [UserController::class, 'impersonate'])->name('users.impersonate');
+
+
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/datatable/users', [UsersDataTable::class, 'index'])->name('datatable.users');
+
+     Route::get('/users/store', [UserController::class, 'store'])->name('users.store');
+     Route::get('/users/update', [UserController::class, 'update'])->name('users.update');
+     Route::get('/users/toggle', [UserController::class, 'toggle'])->name('users.ban.toggle');
+
 });

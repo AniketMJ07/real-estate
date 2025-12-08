@@ -15,9 +15,7 @@ class UsersDataTable extends DataTable
         $users = User::latest();
 
         return DataTables::of($users)
-            ->addColumn('name', function ($user) {
-                return $user->first_name . ' ' . $user->last_name;
-            })
+          
             ->addColumn('action', function ($row) {
                 $html = '<div class="float-end">';
                 if (auth()->user()->id != $row->id && $row->system_role != 'admin') {

@@ -4,6 +4,7 @@ Dashboard
 @endsection
 @section('main_content')
 @include('widgets.loader')
+
 <div class="pc-container">
     <div class="pc-content"><!-- [ Main Content ] start -->
         <div class="row">
@@ -2247,6 +2248,7 @@ Dashboard
         </div><!-- [ Main Content ] end -->
     </div>
 </div>
+
 @endsection
 @push('scripts')
 <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
